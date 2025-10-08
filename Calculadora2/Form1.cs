@@ -20,7 +20,57 @@ namespace Calculadora2
 
         private void btIgual_Click(object sender, EventArgs e)
         {
-            
+            string operacionCadena = this.operacionTxT.Text.Replace(" ", "");
+
+            try
+            {
+    //1-  creo 2 listas, una para los operadoras y otra para los números:
+
+                List<double> numeros = new List<double>();
+                List<char> operadores = new List<char>();
+
+
+                //Bucle para recorrer la cadena IMPORTANSISIMO
+                for (int i = 0; i < operacionCadena.Length; i++)
+                {
+
+            //2- Detectar negativos antes de una operacion
+
+            //3- Leer números(por los decimales)
+
+            //4- Leer operadores
+
+                    for (int j = 0; j < operadores.Count(); i++)
+                        {
+                            char op = operacionCadena[i];
+                            if (op == '+' || op == '-' || op == '*' || op == '/' || op == '^' || op == '√')
+                            {
+                                operadores.Add(op);
+                                break;
+                        }
+                    }
+
+            //5- Para procesar multiplicacion y division primero
+            //6- Para procesar suma y resta despues                
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR");
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
