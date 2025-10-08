@@ -25,7 +25,6 @@ namespace Calculadora2
             try
             {
     //1-  creo 2 listas, una para los operadoras y otra para los números:
-
                 List<double> numeros = new List<double>();
                 List<char> operadores = new List<char>();
 
@@ -50,8 +49,27 @@ namespace Calculadora2
                         }
                     }
 
-            //5- Para procesar multiplicacion y division primero
-            //6- Para procesar suma y resta despues                
+                    //5- Para procesar multiplicacion y division primero
+
+                    for (int j = 0; j < operadores.Count; j++)
+                    {
+                        if (operadores[j] == '*' || operadores[j] == '/')
+                        {
+                            double a = numeros[j];
+                            double b = numeros[j + 1];
+                            double res = operadores[j] == '*' ? a * b : a / b;
+
+                            numeros[j] = res;
+                            numeros.RemoveAt(j + 1);
+                            operadores.RemoveAt(j);
+                            j--;
+                        }
+                    }
+
+
+
+                        //6- Para procesar suma y resta despues
+
 
 
                 }
@@ -202,8 +220,14 @@ namespace Calculadora2
         }
 
         private void bt3_Click(object sender, EventArgs e)   
-        {   
-            
+        {
+            operacionTxT.Text += "3";
+
+        }
+
+        private void btBorrar_Click(object sender, EventArgs e)
+        {
+            this.operacionTxT.Text = "";
         }
     }
 }

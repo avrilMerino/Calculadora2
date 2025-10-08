@@ -48,22 +48,23 @@
             this.bt3 = new System.Windows.Forms.Button();
             this.btComa = new System.Windows.Forms.Button();
             this.bt0 = new System.Windows.Forms.Button();
+            this.btBorrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // operacionTxT
             // 
-            this.operacionTxT.Location = new System.Drawing.Point(32, 35);
+            this.operacionTxT.Location = new System.Drawing.Point(34, 25);
             this.operacionTxT.Multiline = true;
             this.operacionTxT.Name = "operacionTxT";
-            this.operacionTxT.Size = new System.Drawing.Size(295, 65);
+            this.operacionTxT.Size = new System.Drawing.Size(295, 75);
             this.operacionTxT.TabIndex = 1;
             this.operacionTxT.TextChanged += new System.EventHandler(this.operacionTxt_TextChanged);
             // 
             // btIgual
             // 
-            this.btIgual.Location = new System.Drawing.Point(257, 353);
+            this.btIgual.Location = new System.Drawing.Point(259, 347);
             this.btIgual.Name = "btIgual";
-            this.btIgual.Size = new System.Drawing.Size(70, 140);
+            this.btIgual.Size = new System.Drawing.Size(70, 149);
             this.btIgual.TabIndex = 2;
             this.btIgual.Text = "=";
             this.btIgual.UseVisualStyleBackColor = true;
@@ -71,7 +72,7 @@
             // 
             // btSuma
             // 
-            this.btSuma.Location = new System.Drawing.Point(29, 116);
+            this.btSuma.Location = new System.Drawing.Point(31, 119);
             this.btSuma.Name = "btSuma";
             this.btSuma.Size = new System.Drawing.Size(70, 70);
             this.btSuma.TabIndex = 4;
@@ -81,7 +82,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(143, 153);
+            this.button3.Location = new System.Drawing.Point(145, 156);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(0, 0);
             this.button3.TabIndex = 5;
@@ -90,7 +91,7 @@
             // 
             // btResta
             // 
-            this.btResta.Location = new System.Drawing.Point(105, 116);
+            this.btResta.Location = new System.Drawing.Point(107, 119);
             this.btResta.Name = "btResta";
             this.btResta.Size = new System.Drawing.Size(70, 70);
             this.btResta.TabIndex = 6;
@@ -100,7 +101,7 @@
             // 
             // btMultiplicacion
             // 
-            this.btMultiplicacion.Location = new System.Drawing.Point(181, 116);
+            this.btMultiplicacion.Location = new System.Drawing.Point(183, 119);
             this.btMultiplicacion.Name = "btMultiplicacion";
             this.btMultiplicacion.Size = new System.Drawing.Size(70, 70);
             this.btMultiplicacion.TabIndex = 7;
@@ -110,9 +111,9 @@
             // 
             // btDivision
             // 
-            this.btDivision.Location = new System.Drawing.Point(257, 118);
+            this.btDivision.Location = new System.Drawing.Point(259, 119);
             this.btDivision.Name = "btDivision";
-            this.btDivision.Size = new System.Drawing.Size(70, 70);
+            this.btDivision.Size = new System.Drawing.Size(70, 72);
             this.btDivision.TabIndex = 8;
             this.btDivision.Text = "/";
             this.btDivision.UseVisualStyleBackColor = true;
@@ -120,7 +121,7 @@
             // 
             // bt7
             // 
-            this.bt7.Location = new System.Drawing.Point(29, 192);
+            this.bt7.Location = new System.Drawing.Point(31, 195);
             this.bt7.Name = "bt7";
             this.bt7.Size = new System.Drawing.Size(70, 70);
             this.bt7.TabIndex = 9;
@@ -130,7 +131,7 @@
             // 
             // bt8
             // 
-            this.bt8.Location = new System.Drawing.Point(105, 192);
+            this.bt8.Location = new System.Drawing.Point(107, 195);
             this.bt8.Name = "bt8";
             this.bt8.Size = new System.Drawing.Size(70, 70);
             this.bt8.TabIndex = 10;
@@ -140,7 +141,7 @@
             // 
             // bt9
             // 
-            this.bt9.Location = new System.Drawing.Point(181, 192);
+            this.bt9.Location = new System.Drawing.Point(183, 195);
             this.bt9.Name = "bt9";
             this.bt9.Size = new System.Drawing.Size(70, 70);
             this.bt9.TabIndex = 11;
@@ -150,7 +151,7 @@
             // 
             // btExponente
             // 
-            this.btExponente.Location = new System.Drawing.Point(257, 192);
+            this.btExponente.Location = new System.Drawing.Point(259, 195);
             this.btExponente.Name = "btExponente";
             this.btExponente.Size = new System.Drawing.Size(70, 70);
             this.btExponente.TabIndex = 12;
@@ -160,7 +161,7 @@
             // 
             // bt4
             // 
-            this.bt4.Location = new System.Drawing.Point(32, 277);
+            this.bt4.Location = new System.Drawing.Point(34, 271);
             this.bt4.Name = "bt4";
             this.bt4.Size = new System.Drawing.Size(70, 70);
             this.bt4.TabIndex = 13;
@@ -170,7 +171,7 @@
             // 
             // bt5
             // 
-            this.bt5.Location = new System.Drawing.Point(108, 277);
+            this.bt5.Location = new System.Drawing.Point(110, 271);
             this.bt5.Name = "bt5";
             this.bt5.Size = new System.Drawing.Size(70, 70);
             this.bt5.TabIndex = 14;
@@ -180,7 +181,7 @@
             // 
             // bt6
             // 
-            this.bt6.Location = new System.Drawing.Point(181, 277);
+            this.bt6.Location = new System.Drawing.Point(183, 271);
             this.bt6.Name = "bt6";
             this.bt6.Size = new System.Drawing.Size(70, 70);
             this.bt6.TabIndex = 15;
@@ -190,7 +191,7 @@
             // 
             // btRaiz
             // 
-            this.btRaiz.Location = new System.Drawing.Point(257, 277);
+            this.btRaiz.Location = new System.Drawing.Point(259, 271);
             this.btRaiz.Name = "btRaiz";
             this.btRaiz.Size = new System.Drawing.Size(70, 70);
             this.btRaiz.TabIndex = 16;
@@ -200,7 +201,7 @@
             // 
             // bt1
             // 
-            this.bt1.Location = new System.Drawing.Point(32, 353);
+            this.bt1.Location = new System.Drawing.Point(34, 347);
             this.bt1.Name = "bt1";
             this.bt1.Size = new System.Drawing.Size(70, 70);
             this.bt1.TabIndex = 17;
@@ -210,7 +211,7 @@
             // 
             // bt2
             // 
-            this.bt2.Location = new System.Drawing.Point(108, 353);
+            this.bt2.Location = new System.Drawing.Point(110, 347);
             this.bt2.Name = "bt2";
             this.bt2.Size = new System.Drawing.Size(70, 70);
             this.bt2.TabIndex = 18;
@@ -220,7 +221,7 @@
             // 
             // bt3
             // 
-            this.bt3.Location = new System.Drawing.Point(181, 353);
+            this.bt3.Location = new System.Drawing.Point(183, 347);
             this.bt3.Name = "bt3";
             this.bt3.Size = new System.Drawing.Size(70, 70);
             this.bt3.TabIndex = 19;
@@ -230,9 +231,9 @@
             // 
             // btComa
             // 
-            this.btComa.Location = new System.Drawing.Point(181, 436);
+            this.btComa.Location = new System.Drawing.Point(183, 423);
             this.btComa.Name = "btComa";
-            this.btComa.Size = new System.Drawing.Size(70, 57);
+            this.btComa.Size = new System.Drawing.Size(70, 70);
             this.btComa.TabIndex = 20;
             this.btComa.Text = ".";
             this.btComa.UseVisualStyleBackColor = true;
@@ -240,19 +241,30 @@
             // 
             // bt0
             // 
-            this.bt0.Location = new System.Drawing.Point(32, 436);
+            this.bt0.Location = new System.Drawing.Point(107, 423);
             this.bt0.Name = "bt0";
-            this.bt0.Size = new System.Drawing.Size(143, 57);
+            this.bt0.Size = new System.Drawing.Size(70, 73);
             this.bt0.TabIndex = 21;
             this.bt0.Text = "0";
             this.bt0.UseVisualStyleBackColor = true;
             this.bt0.Click += new System.EventHandler(this.bt0_Click);
+            // 
+            // btBorrar
+            // 
+            this.btBorrar.Location = new System.Drawing.Point(34, 423);
+            this.btBorrar.Name = "btBorrar";
+            this.btBorrar.Size = new System.Drawing.Size(70, 70);
+            this.btBorrar.TabIndex = 22;
+            this.btBorrar.Text = "CE";
+            this.btBorrar.UseVisualStyleBackColor = true;
+            this.btBorrar.Click += new System.EventHandler(this.btBorrar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(367, 511);
+            this.Controls.Add(this.btBorrar);
             this.Controls.Add(this.bt0);
             this.Controls.Add(this.btComa);
             this.Controls.Add(this.bt3);
@@ -302,6 +314,7 @@
         private System.Windows.Forms.Button bt3;
         private System.Windows.Forms.Button btComa;
         private System.Windows.Forms.Button bt0;
+        private System.Windows.Forms.Button btBorrar;
     }
 }
 
