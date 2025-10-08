@@ -21,7 +21,8 @@ namespace Calculadora2
         private void btIgual_Click(object sender, EventArgs e)
         {
             string operacionCadena = this.operacionTxT.Text.Replace("", "").Trim();
-            if (operacionCadena[operacionCadena.Length - 1].Equals("+"){
+            if (operacionCadena[operacionCadena.Length - 1].Equals("+"))
+            {
                 operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
             }
 
