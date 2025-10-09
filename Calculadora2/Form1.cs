@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,6 @@ namespace Calculadora2
             {
                 if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' && c != '/' && c != '√' && c != '^' && c != '.')
                 {
-
                     MessageBox.Show("ERROR");
                     return;
                 }
@@ -44,15 +44,87 @@ namespace Calculadora2
                 operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
             }
 
+        //Fase2: separacion de números y operadores
+            List<double> numeros = new List<double>();
+            List<char> operadores = new List<char>();
 
-            try
+            string operadoresValidos = "+-*/^√"; // lista simple para comprobar operadores
+            string numBuffer = "";                 // buffer para construir el número actual
+
+            for (int i = 0; i < operacionCadena.Length; i++)
             {
-            
+                char c = operacionCadena[i];
+
+                //El '-' actual es signo (parte del número) en vez de operador??
+                bool inicioNumeroNegativo = (c == '-') && (i == 0 || operadoresValidos.Contains(operacionCadena[i - 1]));
+
+                if (inicioNumeroNegativo)
+                {
+                    // empezamos un número con '-' y avanzamos para leer sus dígitos/decima
+                    //    
+                    numBuffer = "-";
+                    i++; // pasamos al siguiente carácter que debe ser dígito o '.'
+                         // recoger la secuencia de dígitos y punto decimal
+                    while (i < operacionCadena.Length && (char.IsDigit(operacionCadena[i]) || operacionCadena[i] == '.'))
+                    {
+                        numBuffer += operacionCadena[i];
+                        i++;
+                    }
+                    // validación rápida: que no sea solo "-" o "-."
+                    if (numBuffer == "-" || numBuffer == "-.") throw new Exception("Formato número inválido");
+                    // parsear con InvariantCulture (asegura que '.' sea decimal)
+                    numeros.Add(double.Parse(numBuffer, CultureInfo.InvariantCulture));
+                    numBuffer = "";
+                    i--; // ajustar índice porque el for hará i++ al final
+                    continue;
+                }
+
+                // Si empieza con dígito o punto, recolectamos el número normal
+                if (char.IsDigit(c) || c == '.')
+                {
+                    numBuffer = "";
+                    while (i < operacionCadena.Length && (char.IsDigit(operacionCadena[i]) || operacionCadena[i] == '.'))
+                    {
+                        numBuffer += operacionCadena[i];
+                        i++;
+                    }
+                    // validación simple del número (no solo ".")
+                    if (numBuffer == ".") throw new Exception("Formato número inválido");
+                    numeros.Add(double.Parse(numBuffer, CultureInfo.InvariantCulture));
+                    numBuffer = "";
+                    i--; // ajustar índice por el for
+                    continue;
+                }
+
+                // Si no es número ni signo de negativo, debe ser un operador válido
+                if (operadoresValidos.Contains(c))
+                {
+                    operadores.Add(c);
+                }
+                else
+                {
+                    // carácter inesperado (no debería ocurrir si ya validaste antes)
+                    throw new Exception($"Carácter inválido en expresión: {c}");
+                }
             }
-            catch (Exception ex)
+
+            // Validación final: debe cumplirse numeros.Count == operadores.Count + 1
+            if (numeros.Count == 0 || numeros.Count != operadores.Count + 1)
             {
-                MessageBox.Show("ERROR");
+                throw new Exception("Expresión mal formada");
             }
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
