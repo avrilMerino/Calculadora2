@@ -21,113 +21,187 @@ namespace Calculadora2
 
         private void btIgual_Click(object sender, EventArgs e)
         {
-        //Fase1 : Validar la operación
-            string operacionCadena = this.operacionTxT.Text.Trim();
-
-            if (operacionCadena.Length == 0)
-{
-                MessageBox.Show("Introduce una operación");
-                return;
-}
-            foreach (char c in operacionCadena)
+            try
             {
-                if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' && c != '/' && c != '√' && c != '^' && c != '.')
+                
+                // FASE 1: Lectura y validación básica de la operaciónn
+                // Aquí limpiamos la cadena de espacios, revisamos que no esté vacía
+                // y eliminamos errores típicos como operadores al final.
+
+                string operacionCadena = this.operacionTxT.Text.Replace(" ", "");
+
+                if (operacionCadena.Length == 0)
                 {
-                    MessageBox.Show("ERROR");
+                    MessageBox.Show("Introduce una operación primero.");
                     return;
                 }
-            }
 
-            char ultimo = operacionCadena[operacionCadena.Length - 1];
-            if (ultimo == '+' || ultimo == '-' || ultimo == '*' || ultimo == '/' || ultimo == '√' || ultimo == '^' || ultimo == '.')
-            {
-                operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
-            }
-
-        //Fase2: separacion de números y operadores
-            List<double> numeros = new List<double>();
-            List<char> operadores = new List<char>();
-
-            string operadoresValidos = "+-*/^√"; // lista simple para comprobar operadores
-            string numBuffer = "";                 // buffer para construir el número actual
-
-            for (int i = 0; i < operacionCadena.Length; i++)
-            {
-                char c = operacionCadena[i];
-
-                //El '-' actual es signo (parte del número) en vez de operador??
-                bool inicioNumeroNegativo = (c == '-') && (i == 0 || operadoresValidos.Contains(operacionCadena[i - 1]));
-
-                if (inicioNumeroNegativo)
+                // Revisamos que solo contenga dígitos o símbolos permitidos
+                foreach (char c in operacionCadena)
                 {
-                    // empezamos un número con '-' y avanzamos para leer sus dígitos/decima
-                    //    
-                    numBuffer = "-";
-                    i++; // pasamos al siguiente carácter que debe ser dígito o '.'
-                         // recoger la secuencia de dígitos y punto decimal
+                    if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' &&
+                        c != '/' && c != '√' && c != '^' && c != '.')
+                    {
+                        MessageBox.Show("Símbolo no permitido en la operación.");
+                        return;
+                    }
+                }
+
+                // Si el último carácter es un operador, lo quitamos
+                char ultimo = operacionCadena[operacionCadena.Length - 1];
+                if ("+-*/^√.".Contains(ultimo))
+                    operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
+
+                // ===============================================================
+                // 🧩 FASE 2: Separación de números y operadores
+                // ---------------------------------------------------------------
+                // Aquí recorremos la cadena carácter a carácter.
+                // Vamos construyendo números (incluso con decimales)
+                // y guardamos los operadores encontrados en otra lista.
+                // ===============================================================
+                List<double> numeros = new List<double>();
+                List<char> operadores = new List<char>();
+                string operadoresValidos = "+-*/^√";
+                string numBuffer = "";
+
+                for (int i = 0; i < operacionCadena.Length; i++)
+                {
+                    char c = operacionCadena[i];
+
+                    // Detectar si el '-' es parte de un número negativo
+                    bool esNegativo = (c == '-') && (i == 0 || operadoresValidos.Contains(operacionCadena[i - 1]));
+                    if (esNegativo)
+                    {
+                        numBuffer = "-";
+                        i++;
+                    }
+
+                    // Construimos el número completo (puede tener varios dígitos o '.')
                     while (i < operacionCadena.Length && (char.IsDigit(operacionCadena[i]) || operacionCadena[i] == '.'))
                     {
                         numBuffer += operacionCadena[i];
                         i++;
                     }
-                    // validación rápida: que no sea solo "-" o "-."
-                    if (numBuffer == "-" || numBuffer == "-.") throw new Exception("Formato número inválido");
-                    // parsear con InvariantCulture (asegura que '.' sea decimal)
-                    numeros.Add(double.Parse(numBuffer, CultureInfo.InvariantCulture));
-                    numBuffer = "";
-                    i--; // ajustar índice porque el for hará i++ al final
-                    continue;
-                }
 
-                // Si empieza con dígito o punto, recolectamos el número normal
-                if (char.IsDigit(c) || c == '.')
-                {
-                    numBuffer = "";
-                    while (i < operacionCadena.Length && (char.IsDigit(operacionCadena[i]) || operacionCadena[i] == '.'))
+                    // Si hemos construido un número, lo guardamos
+                    if (numBuffer != "")
                     {
-                        numBuffer += operacionCadena[i];
-                        i++;
+                        numeros.Add(double.Parse(numBuffer, CultureInfo.InvariantCulture));
+                        numBuffer = "";
                     }
-                    // validación simple del número (no solo ".")
-                    if (numBuffer == ".") throw new Exception("Formato número inválido");
-                    numeros.Add(double.Parse(numBuffer, CultureInfo.InvariantCulture));
-                    numBuffer = "";
-                    i--; // ajustar índice por el for
-                    continue;
+
+                    // Si el carácter actual es operador, lo guardamos
+                    if (i < operacionCadena.Length && operadoresValidos.Contains(operacionCadena[i]))
+                    {
+                        operadores.Add(operacionCadena[i]);
+                    }
                 }
 
-                // Si no es número ni signo de negativo, debe ser un operador válido
-                if (operadoresValidos.Contains(c))
+                // Validamos que la cantidad de números y operadores tenga sentido
+                if (numeros.Count == 0 || numeros.Count != operadores.Count + 1)
+                    throw new Exception("Expresión mal formada.");
+
+                // ===============================================================
+                // 🧩 FASE 3: Procesar raíces (√) y potencias (^)
+                // ---------------------------------------------------------------
+                // Se hacen antes que multiplicar o dividir (prioridad matemática).
+                // √ actúa sobre el número siguiente. ^ usa el actual y el siguiente.
+                // ===============================================================
+                for (int i = 0; i < operadores.Count; i++)
                 {
-                    operadores.Add(c);
+                    if (operadores[i] == '√')
+                    {
+                        double valor = numeros[i + 1];
+                        if (valor < 0)
+                            throw new Exception("No se puede calcular la raíz de un número negativo.");
+
+                        double resultado = Math.Sqrt(valor);
+                        numeros[i + 1] = resultado;
+                        operadores.RemoveAt(i);
+                        i--;
+                    }
+                    else if (operadores[i] == '^')
+                    {
+                        double baseNum = numeros[i];
+                        double exponente = numeros[i + 1];
+                        double resultado = Math.Pow(baseNum, exponente);
+
+                        numeros[i] = resultado;
+                        numeros.RemoveAt(i + 1);
+                        operadores.RemoveAt(i);
+                        i--;
+                    }
                 }
-                else
+
+                // ===============================================================
+                // 🧩 FASE 4: Procesar multiplicaciones (*) y divisiones (/)
+                // ---------------------------------------------------------------
+                // Recorremos operadores de izquierda a derecha.
+                // Cada vez que hay * o /, calculamos y reemplazamos los números.
+                // ===============================================================
+                for (int i = 0; i < operadores.Count; i++)
                 {
-                    // carácter inesperado (no debería ocurrir si ya validaste antes)
-                    throw new Exception($"Carácter inválido en expresión: {c}");
+                    if (operadores[i] == '*' || operadores[i] == '/')
+                    {
+                        double a = numeros[i];
+                        double b = numeros[i + 1];
+                        double resultado = 0;
+
+                        if (operadores[i] == '*')
+                            resultado = a * b;
+                        else
+                        {
+                            if (b == 0) throw new DivideByZeroException();
+                            resultado = a / b;
+                        }
+
+                        // Guardamos el resultado y eliminamos los usados
+                        numeros[i] = resultado;
+                        numeros.RemoveAt(i + 1);
+                        operadores.RemoveAt(i);
+                        i--;
+                    }
                 }
+
+                // ===============================================================
+                // 🧩 FASE 5: Procesar sumas (+) y restas (-)
+                // ---------------------------------------------------------------
+                // Ya solo quedan sumas y restas.
+                // Vamos recorriendo y acumulando el resultado total.
+                // ===============================================================
+                double total = numeros[0];
+                for (int i = 0; i < operadores.Count; i++)
+                {
+                    double siguiente = numeros[i + 1];
+                    if (operadores[i] == '+')
+                        total += siguiente;
+                    else if (operadores[i] == '-')
+                        total -= siguiente;
+                }
+
+                // ===============================================================
+                // 🧩 FASE 6: Mostrar el resultado final
+                // ---------------------------------------------------------------
+                // Mostramos el total directamente en la caja de texto.
+                // ToString con InvariantCulture para mantener el punto decimal.
+                // ===============================================================
+                operacionTxT.Text = total.ToString(CultureInfo.InvariantCulture);
             }
 
-            // Validación final: debe cumplirse numeros.Count == operadores.Count + 1
-            if (numeros.Count == 0 || numeros.Count != operadores.Count + 1)
+            // ===============================================================
+            // 🧩 FASE 7: Manejo de errores
+            // ---------------------------------------------------------------
+            // Mostramos mensajes claros al usuario si ocurre algo.
+            // ===============================================================
+            catch (DivideByZeroException)
             {
-                throw new Exception("Expresión mal formada");
+                MessageBox.Show("No se puede dividir entre cero.");
             }
-
-
-
-
-
-
-
-
-
-
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
+            }
         }
-
-
         private void operacionTxt_TextChanged(object sender, EventArgs e)
         {
             
