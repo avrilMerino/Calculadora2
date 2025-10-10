@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.operacionTxT = new System.Windows.Forms.TextBox();
             this.btIgual = new System.Windows.Forms.Button();
             this.btSuma = new System.Windows.Forms.Button();
@@ -329,6 +330,7 @@
             this.Controls.Add(this.btSuma);
             this.Controls.Add(this.btIgual);
             this.Controls.Add(this.operacionTxT);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
