@@ -52,10 +52,10 @@ namespace Calculadora2
                 if ("+-*/^√.".Contains(ultimo))
                     operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
 
-//FASE 2: Separación de números y operadores
-                // Aquí recorremos la cadena carácter a carácter.
+//FASE 2: Separación de números y operadore
+                // Aquí recorremos la cadena carácter a carácter
                 // Vamos construyendo números (incluso con decimales)
-                // y guardamos los operadores encontrados en otra lista.
+                // y guardamos los operadores encontrados en otra lista
 
                 List<double> numeros = new List<double>();
                 List<char> operadores = new List<char>();
@@ -101,8 +101,8 @@ namespace Calculadora2
 
 
 // FASE 3: Procesar raíces (√) y potencias (^)
-                // Se hacen antes que multiplicar o dividir (prioridad matemática).
-                // √ actúa sobre el número siguiente. ^ usa el actual y el siguiente.
+                // Se hacen antes que multiplicar o dividir
+                // √ actúa sobre el número siguiente. ^ usa el actual y el siguiente
 
                 for (int i = 0; i < operadores.Count; i++)
                 {
@@ -131,8 +131,8 @@ namespace Calculadora2
                 }
 
 // FASE 4: Procesar multiplicaciones (*) y divisiones (/)
-                // Recorremos operadores de izquierda a derecha.
-                // Cada vez que hay * o /, calculamos y reemplazamos los números.
+                // Recorremos operadores de izquierda a derecha
+                // Cada vez que hay * o /, calculamos y reemplazamos los números
                 for (int i = 0; i < operadores.Count; i++)
                 {
                     if (operadores[i] == '*' || operadores[i] == '/')
@@ -192,7 +192,7 @@ namespace Calculadora2
         private void AgregarTexto(string texto)
         {
             // Añade un número u operador al final del texto actual
-            operacionTxT.Text += texto;
+            operacionTxT.Text.Append(texto).toS;
         }
 
         private void AgregarOperador(char operador)
@@ -233,11 +233,6 @@ namespace Calculadora2
         private void btBorrar_Click(object sender, EventArgs e)
         {
             operacionTxT.Text = "";
-        }
-
-        private void operacionTxt_TextChanged(object sender, EventArgs e)
-{
-            //evita que el diseñador falle  vete tu a saber por qué
         }
 
     }
