@@ -198,6 +198,7 @@ namespace Calculadora2
         {
             // Evita que se añadan dos operadores seguidos (como "5++" o "6**")
             if (operacionTxT.TextLength == 0) return; // No puede empezar con operador (excepto '-')
+
             operacionTxT.AppendText(operador.ToString());
         }
 

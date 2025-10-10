@@ -59,9 +59,9 @@
             this.operacionTxT.Location = new System.Drawing.Point(23, 25);
             this.operacionTxT.Multiline = true;
             this.operacionTxT.Name = "operacionTxT";
-            this.operacionTxT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.operacionTxT.Size = new System.Drawing.Size(295, 75);
             this.operacionTxT.TabIndex = 1;
+            this.operacionTxT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btIgual
             // 
