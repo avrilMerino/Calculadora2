@@ -42,12 +42,12 @@ namespace Calculadora2
                     if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' &&
                         c != '/' && c != '√' && c != '^' && c != '.')
                     {
-                        MessageBox.Show("Símbolo no permitido en la operación.");
+                        MessageBox.Show("Símbolo no válido");
                         return;
                     }
                 }
 
-                // Si el último carácter es un operador, lo quitamos
+                // si el último carácter es un operador, lo quitamos
                 char ultimo = operacionCadena[operacionCadena.Length - 1];
                 if ("+-*/^√.".Contains(ultimo))
                     operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
@@ -100,7 +100,7 @@ namespace Calculadora2
                     throw new Exception("Expresión mal formada.");
 
 
-// FASE 3: Procesar raíces (√) y potencias (^)
+// FASE 3: Procesar raíces  y poencias
                 // Se hacen antes que multiplicar o dividir
                 // √ actúa sobre el número siguiente. ^ usa el actual y el siguiente
 
