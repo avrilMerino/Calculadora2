@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Calculadora2
@@ -160,6 +162,10 @@ namespace Calculadora2
 
                 // FASE 6: Mostrar el resultado final
                 operacionTxT.Text = total.ToString(CultureInfo.InvariantCulture);
+                operacionTxT.Text = total.ToString(CultureInfo.InvariantCulture);
+                ParpadearResultado();
+
+
             }
 
             //FASE 7: Manejo de errores
@@ -237,6 +243,21 @@ namespace Calculadora2
         {
             operacionTxT.Text = "";
         }
+        private async void ParpadearResultado()
+        {
+            Color originalColor = operacionTxT.BackColor;
+            int parpadeos = 3; // cantidad de parpadeos
+            int intervalo = 150; // milisegundos entre cambios
+
+            for (int i = 0; i < parpadeos; i++)
+            {
+                operacionTxT.BackColor = Color.LightBlue;
+                await Task.Delay(intervalo);
+                operacionTxT.BackColor = originalColor;
+                await Task.Delay(intervalo);
+            }
+        }
+
 
     }
 }
