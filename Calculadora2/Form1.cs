@@ -32,6 +32,7 @@ namespace Calculadora2
             {
                 if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' && c != '/' && c != '√' && c != '^' && c != '.')
                 {
+
                     MessageBox.Show("ERROR");
                     return;
                 }
