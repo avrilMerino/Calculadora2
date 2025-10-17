@@ -21,11 +21,20 @@ namespace Calculadora2
         private void btIgual_Click(object sender, EventArgs e)
         {
             string operacionCadena = this.operacionTxT.Text.Replace("", "").Trim();
+            foreach (char c in operacionCadena)
+            {
+                if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' && c != '/' && c != '√' && c != '^' && c != '.')
+                {
+                    MessageBox.Show("ERROR");
+                    return;
+                }
+            }
+
             if (operacionCadena[operacionCadena.Length - 1].Equals("+"))
             {
                 operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
             }
-
+             
 
             try
             {
@@ -35,8 +44,6 @@ namespace Calculadora2
             {
                 MessageBox.Show("ERROR");
             }
-
-
         }
 
 
