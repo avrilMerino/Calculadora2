@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.operacion = new System.Windows.Forms.TextBox();
+            this.operacionTxT = new System.Windows.Forms.TextBox();
             this.btIgual = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btSuma = new System.Windows.Forms.Button();
@@ -51,14 +51,14 @@
             this.bt0 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // operacion
+            // operacionTxT
             // 
-            this.operacion.Location = new System.Drawing.Point(32, 35);
-            this.operacion.Multiline = true;
-            this.operacion.Name = "operacion";
-            this.operacion.Size = new System.Drawing.Size(295, 65);
-            this.operacion.TabIndex = 1;
-            this.operacion.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.operacionTxT.Location = new System.Drawing.Point(32, 35);
+            this.operacionTxT.Multiline = true;
+            this.operacionTxT.Name = "operacionTxT";
+            this.operacionTxT.Size = new System.Drawing.Size(295, 65);
+            this.operacionTxT.TabIndex = 1;
+            this.operacionTxT.TextChanged += new System.EventHandler(this.operacionTxt_TextChanged);
             // 
             // btIgual
             // 
@@ -68,7 +68,7 @@
             this.btIgual.TabIndex = 2;
             this.btIgual.Text = "=";
             this.btIgual.UseVisualStyleBackColor = true;
-            this.btIgual.Click += new System.EventHandler(this.button1_Click);
+            this.btIgual.Click += new System.EventHandler(this.btIgual_Click);
             // 
             // textBox2
             // 
@@ -281,7 +281,7 @@
             this.Controls.Add(this.btSuma);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.btIgual);
-            this.Controls.Add(this.operacion);
+            this.Controls.Add(this.operacionTxT);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -291,7 +291,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox operacion;
+        private System.Windows.Forms.TextBox operacionTxT;
         private System.Windows.Forms.Button btIgual;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btSuma;
