@@ -238,7 +238,7 @@ namespace Calculadora2
         private void btExponente_Click(object sender, EventArgs e) => AgregarOperador('^');
         private void btComa_Click(object sender, EventArgs e) => AgregarOperador('.');
 
-        //BOTÓN BORRAR
+        //BOtoN BORRAR
         private void btBorrar_Click(object sender, EventArgs e)
         {
             operacionTxT.Text = "";
