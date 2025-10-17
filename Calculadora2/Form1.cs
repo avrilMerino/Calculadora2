@@ -102,7 +102,7 @@ namespace Calculadora2
             int aux = this.operacionTxT.TextLength;
             char signo = this.operacionTxT.Text[aux - 1];
 
-            if (signo != '+')
+            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
             {
                 operacionTxT.Text += "+";
             }
@@ -118,7 +118,7 @@ namespace Calculadora2
             int aux = this.operacionTxT.TextLength;
             char signo = this.operacionTxT.Text[aux - 1];
 
-            if (signo != '√')
+            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
             {
                 operacionTxT.Text += "√";
             }
@@ -134,7 +134,7 @@ namespace Calculadora2
             int aux = this.operacionTxT.TextLength;
             char signo = this.operacionTxT.Text[aux - 1];
 
-            if (signo != '.')
+            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
             {
                 operacionTxT.Text += ".";
             }
@@ -145,7 +145,7 @@ namespace Calculadora2
             int aux = this.operacionTxT.TextLength;
             char signo = this.operacionTxT.Text[aux - 1];
 
-            if (signo != '-')
+            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
             {
                 operacionTxT.Text += "-";
             }
@@ -156,7 +156,7 @@ namespace Calculadora2
             int aux = this.operacionTxT.TextLength;
             char signo = this.operacionTxT.Text[aux - 1];
 
-            if (signo != '*')
+            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
             {
                 operacionTxT.Text += "*";
             }
@@ -167,7 +167,7 @@ namespace Calculadora2
             int aux = this.operacionTxT.TextLength;
             char signo = this.operacionTxT.Text[aux - 1];
 
-            if (signo != '/')
+            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
             {
                 operacionTxT.Text += "/";
             }

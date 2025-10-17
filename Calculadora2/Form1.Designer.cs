@@ -53,6 +53,7 @@
             // 
             // operacionTxT
             // 
+            this.operacionTxT.BackColor = System.Drawing.Color.White;
             this.operacionTxT.Location = new System.Drawing.Point(34, 25);
             this.operacionTxT.Multiline = true;
             this.operacionTxT.Name = "operacionTxT";
@@ -62,16 +63,21 @@
             // 
             // btIgual
             // 
+            this.btIgual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btIgual.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btIgual.ForeColor = System.Drawing.Color.White;
             this.btIgual.Location = new System.Drawing.Point(259, 347);
             this.btIgual.Name = "btIgual";
             this.btIgual.Size = new System.Drawing.Size(70, 149);
             this.btIgual.TabIndex = 2;
             this.btIgual.Text = "=";
-            this.btIgual.UseVisualStyleBackColor = true;
+            this.btIgual.UseVisualStyleBackColor = false;
             this.btIgual.Click += new System.EventHandler(this.btIgual_Click);
             // 
             // btSuma
             // 
+            this.btSuma.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSuma.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btSuma.Location = new System.Drawing.Point(31, 119);
             this.btSuma.Name = "btSuma";
             this.btSuma.Size = new System.Drawing.Size(70, 70);
@@ -91,6 +97,8 @@
             // 
             // btResta
             // 
+            this.btResta.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btResta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btResta.Location = new System.Drawing.Point(107, 119);
             this.btResta.Name = "btResta";
             this.btResta.Size = new System.Drawing.Size(70, 70);
@@ -101,6 +109,8 @@
             // 
             // btMultiplicacion
             // 
+            this.btMultiplicacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMultiplicacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btMultiplicacion.Location = new System.Drawing.Point(183, 119);
             this.btMultiplicacion.Name = "btMultiplicacion";
             this.btMultiplicacion.Size = new System.Drawing.Size(70, 70);
@@ -111,6 +121,7 @@
             // 
             // btDivision
             // 
+            this.btDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDivision.Location = new System.Drawing.Point(259, 119);
             this.btDivision.Name = "btDivision";
             this.btDivision.Size = new System.Drawing.Size(70, 72);
@@ -121,6 +132,8 @@
             // 
             // bt7
             // 
+            this.bt7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt7.Location = new System.Drawing.Point(31, 195);
             this.bt7.Name = "bt7";
             this.bt7.Size = new System.Drawing.Size(70, 70);
@@ -131,16 +144,21 @@
             // 
             // bt8
             // 
+            this.bt8.BackColor = System.Drawing.Color.White;
+            this.bt8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt8.Location = new System.Drawing.Point(107, 195);
             this.bt8.Name = "bt8";
             this.bt8.Size = new System.Drawing.Size(70, 70);
             this.bt8.TabIndex = 10;
             this.bt8.Text = "8";
-            this.bt8.UseVisualStyleBackColor = true;
+            this.bt8.UseVisualStyleBackColor = false;
             this.bt8.Click += new System.EventHandler(this.bt8_Click);
             // 
             // bt9
             // 
+            this.bt9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt9.Location = new System.Drawing.Point(183, 195);
             this.bt9.Name = "bt9";
             this.bt9.Size = new System.Drawing.Size(70, 70);
@@ -151,6 +169,8 @@
             // 
             // btExponente
             // 
+            this.btExponente.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btExponente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btExponente.Location = new System.Drawing.Point(259, 195);
             this.btExponente.Name = "btExponente";
             this.btExponente.Size = new System.Drawing.Size(70, 70);
@@ -161,6 +181,8 @@
             // 
             // bt4
             // 
+            this.bt4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt4.Location = new System.Drawing.Point(34, 271);
             this.bt4.Name = "bt4";
             this.bt4.Size = new System.Drawing.Size(70, 70);
@@ -171,6 +193,8 @@
             // 
             // bt5
             // 
+            this.bt5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt5.Location = new System.Drawing.Point(110, 271);
             this.bt5.Name = "bt5";
             this.bt5.Size = new System.Drawing.Size(70, 70);
@@ -181,6 +205,8 @@
             // 
             // bt6
             // 
+            this.bt6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt6.Location = new System.Drawing.Point(183, 271);
             this.bt6.Name = "bt6";
             this.bt6.Size = new System.Drawing.Size(70, 70);
@@ -191,6 +217,7 @@
             // 
             // btRaiz
             // 
+            this.btRaiz.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btRaiz.Location = new System.Drawing.Point(259, 271);
             this.btRaiz.Name = "btRaiz";
             this.btRaiz.Size = new System.Drawing.Size(70, 70);
@@ -201,6 +228,7 @@
             // 
             // bt1
             // 
+            this.bt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt1.Location = new System.Drawing.Point(34, 347);
             this.bt1.Name = "bt1";
             this.bt1.Size = new System.Drawing.Size(70, 70);
@@ -211,6 +239,8 @@
             // 
             // bt2
             // 
+            this.bt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt2.Location = new System.Drawing.Point(110, 347);
             this.bt2.Name = "bt2";
             this.bt2.Size = new System.Drawing.Size(70, 70);
@@ -221,6 +251,8 @@
             // 
             // bt3
             // 
+            this.bt3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.bt3.Location = new System.Drawing.Point(183, 347);
             this.bt3.Name = "bt3";
             this.bt3.Size = new System.Drawing.Size(70, 70);
@@ -231,6 +263,8 @@
             // 
             // btComa
             // 
+            this.btComa.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btComa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btComa.Location = new System.Drawing.Point(183, 423);
             this.btComa.Name = "btComa";
             this.btComa.Size = new System.Drawing.Size(70, 70);
@@ -241,6 +275,7 @@
             // 
             // bt0
             // 
+            this.bt0.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt0.Location = new System.Drawing.Point(107, 423);
             this.bt0.Name = "bt0";
             this.bt0.Size = new System.Drawing.Size(70, 73);
@@ -251,18 +286,22 @@
             // 
             // btBorrar
             // 
+            this.btBorrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.btBorrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btBorrar.ForeColor = System.Drawing.Color.White;
             this.btBorrar.Location = new System.Drawing.Point(34, 423);
             this.btBorrar.Name = "btBorrar";
             this.btBorrar.Size = new System.Drawing.Size(70, 70);
             this.btBorrar.TabIndex = 22;
             this.btBorrar.Text = "CE";
-            this.btBorrar.UseVisualStyleBackColor = true;
+            this.btBorrar.UseVisualStyleBackColor = false;
             this.btBorrar.Click += new System.EventHandler(this.btBorrar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(367, 511);
             this.Controls.Add(this.btBorrar);
             this.Controls.Add(this.bt0);
