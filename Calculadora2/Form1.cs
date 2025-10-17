@@ -89,7 +89,7 @@ namespace Calculadora2
                 }
 
                 //Procesar suma y resta
-                double resultadoFinal = numeros[0];
+                double resultadoFinal =   numeros[0];
                 for (int j = 0; j < operadores.Count; j++)
                 {
                     if (operadores[j] == '+') resultadoFinal += numeros[j + 1];
