@@ -20,7 +20,14 @@ namespace Calculadora2
 
         private void btIgual_Click(object sender, EventArgs e)
         {
-            string operacionCadena = this.operacionTxT.Text.Replace("", "").Trim();
+        //Fase1 : Validar la operación
+            string operacionCadena = this.operacionTxT.Text.Trim();
+
+            if (operacionCadena.Length == 0)
+{
+                MessageBox.Show("Introduce una operación");
+                return;
+}
             foreach (char c in operacionCadena)
             {
                 if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' && c != '/' && c != '√' && c != '^' && c != '.')
@@ -30,11 +37,12 @@ namespace Calculadora2
                 }
             }
 
-            if (operacionCadena[operacionCadena.Length - 1].Equals("+"))
+            char ultimo = operacionCadena[operacionCadena.Length - 1];
+            if (ultimo == '+' || ultimo == '-' || ultimo == '*' || ultimo == '/' || ultimo == '√' || ultimo == '^' || ultimo == '.')
             {
                 operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
             }
-             
+
 
             try
             {
@@ -183,6 +191,11 @@ namespace Calculadora2
         private void btBorrar_Click(object sender, EventArgs e)
         {
             this.operacionTxT.Text = "";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
