@@ -24,7 +24,7 @@ namespace Calculadora2
             try
             {
                 
-                // FASE 1: Lectura y validación básica de la operaciónn
+// FASE 1: Lectura y validación básica de la operaciónn
                 // Aquí limpiamos la cadena de espacios, revisamos que no esté vacía
                 // y eliminamos errores típicos como operadores al final.
 
@@ -52,13 +52,11 @@ namespace Calculadora2
                 if ("+-*/^√.".Contains(ultimo))
                     operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
 
-                // ===============================================================
-                // 🧩 FASE 2: Separación de números y operadores
-                // ---------------------------------------------------------------
+//FASE 2: Separación de números y operadores
                 // Aquí recorremos la cadena carácter a carácter.
                 // Vamos construyendo números (incluso con decimales)
                 // y guardamos los operadores encontrados en otra lista.
-                // ===============================================================
+
                 List<double> numeros = new List<double>();
                 List<char> operadores = new List<char>();
                 string operadoresValidos = "+-*/^√";
@@ -101,12 +99,11 @@ namespace Calculadora2
                 if (numeros.Count == 0 || numeros.Count != operadores.Count + 1)
                     throw new Exception("Expresión mal formada.");
 
-                // ===============================================================
-                // 🧩 FASE 3: Procesar raíces (√) y potencias (^)
-                // ---------------------------------------------------------------
+
+// FASE 3: Procesar raíces (√) y potencias (^)
                 // Se hacen antes que multiplicar o dividir (prioridad matemática).
                 // √ actúa sobre el número siguiente. ^ usa el actual y el siguiente.
-                // ===============================================================
+
                 for (int i = 0; i < operadores.Count; i++)
                 {
                     if (operadores[i] == '√')
@@ -133,12 +130,9 @@ namespace Calculadora2
                     }
                 }
 
-                // ===============================================================
-                // 🧩 FASE 4: Procesar multiplicaciones (*) y divisiones (/)
-                // ---------------------------------------------------------------
+// FASE 4: Procesar multiplicaciones (*) y divisiones (/)
                 // Recorremos operadores de izquierda a derecha.
                 // Cada vez que hay * o /, calculamos y reemplazamos los números.
-                // ===============================================================
                 for (int i = 0; i < operadores.Count; i++)
                 {
                     if (operadores[i] == '*' || operadores[i] == '/')
@@ -163,12 +157,9 @@ namespace Calculadora2
                     }
                 }
 
-                // ===============================================================
-                // 🧩 FASE 5: Procesar sumas (+) y restas (-)
-                // ---------------------------------------------------------------
+//FASE 5: Procesar sumas (+) y restas (-)
                 // Ya solo quedan sumas y restas.
                 // Vamos recorriendo y acumulando el resultado total.
-                // ===============================================================
                 double total = numeros[0];
                 for (int i = 0; i < operadores.Count; i++)
                 {
@@ -179,170 +170,75 @@ namespace Calculadora2
                         total -= siguiente;
                 }
 
-                // ===============================================================
-                // 🧩 FASE 6: Mostrar el resultado final
-                // ---------------------------------------------------------------
+// FASE 6: Mostrar el resultado final
                 // Mostramos el total directamente en la caja de texto.
                 // ToString con InvariantCulture para mantener el punto decimal.
-                // ===============================================================
                 operacionTxT.Text = total.ToString(CultureInfo.InvariantCulture);
             }
 
-            // ===============================================================
-            // 🧩 FASE 7: Manejo de errores
-            // ---------------------------------------------------------------
-            // Mostramos mensajes claros al usuario si ocurre algo.
-            // ===============================================================
+//FASE 7: Manejo de errores
+            // Mostramos mensajes claros si ocurre algo.
             catch (DivideByZeroException)
             {
-                MessageBox.Show("No se puede dividir entre cero.");
+                MessageBox.Show("Vuelve a primaria");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("ERROR: " + ex.Message);
             }
         }
-        private void operacionTxt_TextChanged(object sender, EventArgs e)
+
+// BLOQUE DE BOTONES: Entrada de números y operadores
+        private void AgregarTexto(string texto)
         {
-            
+            // Añade un número u operador al final del texto actual
+            operacionTxT.Text += texto;
         }
 
-        private void btSuma_Click(object sender, EventArgs e)
+        private void AgregarOperador(char operador)
         {
-            int aux = this.operacionTxT.TextLength;
-            char signo = this.operacionTxT.Text[aux - 1];
+            // Evita que se añadan dos operadores seguidos (como "5++" o "6**")
+            if (operacionTxT.TextLength == 0) return; // No puede empezar con operador (excepto '-')
+            char ultimo = operacionTxT.Text.Last();
 
-            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
+            string operadores = "+-*/√^.";
+            if (!operadores.Contains(ultimo))
             {
-                operacionTxT.Text += "+";
-            }
-        }
-        
-        private void bt0_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "0";
-        }
-
-        private void btRaiz_Click(object sender, EventArgs e)
-        {
-            int aux = this.operacionTxT.TextLength;
-            char signo = this.operacionTxT.Text[aux - 1];
-
-            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
-            {
-                operacionTxT.Text += "√";
+                operacionTxT.Text += operador;
             }
         }
 
-        private void bt6_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "6";
-        }
+        //BOTONES DE NÚMEROS
+        private void bt0_Click(object sender, EventArgs e) => AgregarTexto("0");
+        private void bt1_Click(object sender, EventArgs e) => AgregarTexto("1");
+        private void bt2_Click(object sender, EventArgs e) => AgregarTexto("2");
+        private void bt3_Click(object sender, EventArgs e) => AgregarTexto("3");
+        private void bt4_Click(object sender, EventArgs e) => AgregarTexto("4");
+        private void bt5_Click(object sender, EventArgs e) => AgregarTexto("5");
+        private void bt6_Click(object sender, EventArgs e) => AgregarTexto("6");
+        private void bt7_Click(object sender, EventArgs e) => AgregarTexto("7");
+        private void bt8_Click(object sender, EventArgs e) => AgregarTexto("8");
+        private void bt9_Click(object sender, EventArgs e) => AgregarTexto("9");
 
-        private void btComa_Click(object sender, EventArgs e)
-        {
-            int aux = this.operacionTxT.TextLength;
-            char signo = this.operacionTxT.Text[aux - 1];
+        //BOTONES DE OPERADORES
+        private void btSuma_Click(object sender, EventArgs e) => AgregarOperador('+');
+        private void btResta_Click(object sender, EventArgs e) => AgregarOperador('-');
+        private void btMultiplicacion_Click(object sender, EventArgs e) => AgregarOperador('*');
+        private void btDivision_Click(object sender, EventArgs e) => AgregarOperador('/');
+        private void btRaiz_Click(object sender, EventArgs e) => AgregarOperador('√');
+        private void btExponente_Click(object sender, EventArgs e) => AgregarOperador('^');
+        private void btComa_Click(object sender, EventArgs e) => AgregarOperador('.');
 
-            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
-            {
-                operacionTxT.Text += ".";
-            }
-        }
-
-        private void btResta_Click(object sender, EventArgs e)
-        {
-            int aux = this.operacionTxT.TextLength;
-            char signo = this.operacionTxT.Text[aux - 1];
-
-            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
-            {
-                operacionTxT.Text += "-";
-            }
-        }
-
-        private void btMultiplicacion_Click(object sender, EventArgs e)
-        {
-            int aux = this.operacionTxT.TextLength;
-            char signo = this.operacionTxT.Text[aux - 1];
-
-            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
-            {
-                operacionTxT.Text += "*";
-            }
-        }
-
-        private void btDivision_Click(object sender, EventArgs e)
-        {
-            int aux = this.operacionTxT.TextLength;
-            char signo = this.operacionTxT.Text[aux - 1];
-
-            if (signo != '+' || signo != '-' || signo != '*' || signo != '/' || signo != '√' || signo != '^' || signo != '.')
-            {
-                operacionTxT.Text += "/";
-            }
-        }
-
-        private void bt7_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "7";
-        }
-
-        private void bt8_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "8";
-        }
-
-        private void bt9_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "9";
-        }
-
-        private void btExponente_Click(object sender, EventArgs e)
-        {
-            int aux = this.operacionTxT.TextLength;
-            char signo = this.operacionTxT.Text[aux - 1];
-
-            if (signo != '^')
-            {
-                operacionTxT.Text += "^";
-            }
-        }
-
-        private void bt4_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "4";
-        }
-
-        private void bt5_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "5";
-        }
-
-        private void bt1_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "1";
-        }
-
-        private void bt2_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "2";
-        }
-
-        private void bt3_Click(object sender, EventArgs e)   
-        {
-            operacionTxT.Text += "3";
-
-        }
-
+        //BOTÓN BORRAR
         private void btBorrar_Click(object sender, EventArgs e)
         {
-            this.operacionTxT.Text = "";
+            operacionTxT.Text = "";
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+        private void operacionTxt_TextChanged(object sender, EventArgs e)
+{
+            //evita que el diseñador falle  vete tu a saber por qué
         }
+
     }
 }
