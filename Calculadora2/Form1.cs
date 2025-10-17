@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Calculadora2
 {
@@ -23,11 +17,8 @@ namespace Calculadora2
         {
             try
             {
-                
-// FASE 1: Lectura y validación básica de la operaciónn
-                // Aquí limpiamos la cadena de espacios, revisamos que no esté vacía
-                // y eliminamos errores típicos como operadores al final.
-
+                // FASE 1: Lectura y validación básica de la operación
+                // Limpieza de espacios, verificación de vacíos y eliminación de operadores al final.
                 string operacionCadena = this.operacionTxT.Text.Replace(" ", "");
 
                 if (operacionCadena.Length == 0)
@@ -36,7 +27,7 @@ namespace Calculadora2
                     return;
                 }
 
-                // Revisamos que solo contenga dígitos o símbolos permitidos
+                // Validar caracteres permitidos
                 foreach (char c in operacionCadena)
                 {
                     if (!char.IsDigit(c) && c != '+' && c != '-' && c != '*' &&
@@ -47,16 +38,12 @@ namespace Calculadora2
                     }
                 }
 
-                // si el último carácter es un operador, lo quitamos
+                // Si el último carácter es un operador, se elimina (excepto '√' porque puede preceder)
                 char ultimo = operacionCadena[operacionCadena.Length - 1];
-                if ("+-*/^√.".Contains(ultimo))
+                if ("+-*/^.".Contains(ultimo))
                     operacionCadena = operacionCadena.Remove(operacionCadena.Length - 1);
 
-//FASE 2: Separación de números y operadore
-                // Aquí recorremos la cadena carácter a carácter
-                // Vamos construyendo números (incluso con decimales)
-                // y guardamos los operadores encontrados en otra lista
-
+                // FASE 2: Separación de números y operadores
                 List<double> numeros = new List<double>();
                 List<char> operadores = new List<char>();
                 string operadoresValidos = "+-*/^√";
@@ -66,58 +53,82 @@ namespace Calculadora2
                 {
                     char c = operacionCadena[i];
 
-                    // Detectar si el '-' es parte de un número negativo
+                    // Detectar si '-' pertenece a un número negativo
                     bool esNegativo = (c == '-') && (i == 0 || operadoresValidos.Contains(operacionCadena[i - 1]));
                     if (esNegativo)
                     {
                         numBuffer = "-";
                         i++;
+                        if (i >= operacionCadena.Length)
+                            throw new Exception("Expresión incompleta después del signo negativo.");
+                        c = operacionCadena[i];
                     }
 
-                    // Construimos el número completo (puede tener varios dígitos o '.')
+                    // Procesar raíces √
+                    if (c == '√')
+                    {
+                        operadores.Add('√');
+                        continue;
+                    }
+
+                    // Construir número completo (dígitos y punto decimal)
                     while (i < operacionCadena.Length && (char.IsDigit(operacionCadena[i]) || operacionCadena[i] == '.'))
                     {
                         numBuffer += operacionCadena[i];
                         i++;
                     }
 
-                    // Si hemos construido un número, lo guardamos
+                    // Guardar número si se construyó correctamente
                     if (numBuffer != "")
                     {
-                        numeros.Add(double.Parse(numBuffer, CultureInfo.InvariantCulture));
+                        if (!double.TryParse(numBuffer, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
+                            throw new Exception("Número no válido: " + numBuffer);
+                        numeros.Add(num);
                         numBuffer = "";
                     }
 
-                    // Si el carácter actual es operador, lo guardamos
-                    if (i < operacionCadena.Length && operadoresValidos.Contains(operacionCadena[i]))
+                    // Guardar operador si corresponde (menos '√' que ya se trató)
+                    if (i < operacionCadena.Length && operadoresValidos.Contains(operacionCadena[i]) && operacionCadena[i] != '√')
                     {
                         operadores.Add(operacionCadena[i]);
                     }
                 }
 
-                // Validamos que la cantidad de números y operadores tenga sentido
-                if (numeros.Count == 0 || numeros.Count != operadores.Count + 1)
+                // Validar coherencia entre números y operadores (ahora más flexible con √)
+                if (numeros.Count == 0)
                     throw new Exception("Expresión mal formada.");
+                if (operadores.Count > numeros.Count)
+                    throw new Exception("Demasiados operadores.");
 
+                // FASE 3: Procesar raíces y potencias
+                // √ primero (de izquierda a derecha), ^ después (de derecha a izquierda)
 
-// FASE 3: Procesar raíces  y poencias
-                // Se hacen antes que multiplicar o dividir
-                // √ actúa sobre el número siguiente. ^ usa el actual y el siguiente
-
+                // Procesar raíces — ahora √ puede estar antes del primer número
                 for (int i = 0; i < operadores.Count; i++)
                 {
                     if (operadores[i] == '√')
                     {
-                        double valor = numeros[i + 1];
+                        // Si es la primera posición y hay al menos un número, aplica sobre el primero
+                        int indiceNumero = (i == 0) ? 0 : i + 1;
+
+                        if (indiceNumero >= numeros.Count)
+                            throw new Exception("Raíz sin número válido después.");
+
+                        double valor = numeros[indiceNumero];
                         if (valor < 0)
                             throw new Exception("No se puede calcular la raíz de un número negativo.");
 
                         double resultado = Math.Sqrt(valor);
-                        numeros[i + 1] = resultado;
+                        numeros[indiceNumero] = resultado;
                         operadores.RemoveAt(i);
                         i--;
                     }
-                    else if (operadores[i] == '^')
+                }
+
+                // Procesar potencias (derecha a izquierda)
+                for (int i = operadores.Count - 1; i >= 0; i--)
+                {
+                    if (operadores[i] == '^')
                     {
                         double baseNum = numeros[i];
                         double exponente = numeros[i + 1];
@@ -126,30 +137,27 @@ namespace Calculadora2
                         numeros[i] = resultado;
                         numeros.RemoveAt(i + 1);
                         operadores.RemoveAt(i);
-                        i--;
                     }
                 }
 
-// FASE 4: Procesar multiplicaciones (*) y divisiones (/)
-                // Recorremos operadores de izquierda a derecha
-                // Cada vez que hay * o /, calculamos y reemplazamos los números
+                // FASE 4: Multiplicaciones (*) y divisiones (/)
                 for (int i = 0; i < operadores.Count; i++)
                 {
                     if (operadores[i] == '*' || operadores[i] == '/')
                     {
                         double a = numeros[i];
                         double b = numeros[i + 1];
-                        double resultado = 0;
+                        double resultado;
 
                         if (operadores[i] == '*')
                             resultado = a * b;
                         else
                         {
-                            if (b == 0) throw new DivideByZeroException();
+                            if (b == 0)
+                                throw new DivideByZeroException();
                             resultado = a / b;
                         }
 
-                        // Guardamos el resultado y eliminamos los usados
                         numeros[i] = resultado;
                         numeros.RemoveAt(i + 1);
                         operadores.RemoveAt(i);
@@ -157,9 +165,7 @@ namespace Calculadora2
                     }
                 }
 
-//FASE 5: Procesar sumas (+) y restas (-)
-                // Ya solo quedan sumas y restas.
-                // Vamos recorriendo y acumulando el resultado total.
+                // FASE 5: Sumas (+) y restas (-)
                 double total = numeros[0];
                 for (int i = 0; i < operadores.Count; i++)
                 {
@@ -170,16 +176,14 @@ namespace Calculadora2
                         total -= siguiente;
                 }
 
-// FASE 6: Mostrar el resultado final
-                // Mostramos el total directamente en la caja de texto.
-                // ToString con InvariantCulture para mantener el punto decimal.
+                // FASE 6: Mostrar resultado
                 operacionTxT.Text = total.ToString(CultureInfo.InvariantCulture);
             }
 
-//FASE 7: Manejo de errores
+            // FASE 7: Manejo de errores
             catch (DivideByZeroException)
             {
-                MessageBox.Show("Vuelve a primaria");
+                MessageBox.Show("Error: División entre cero.");
             }
             catch (Exception ex)
             {
@@ -187,7 +191,7 @@ namespace Calculadora2
             }
         }
 
-// BLOQUE DE BOTONES: Entrada de números y operadores
+        // BLOQUE DE BOTONES: Entrada de números y operadores
         private void AgregarTexto(string texto)
         {
             // Añade un número u operador al final del texto actual
@@ -196,13 +200,25 @@ namespace Calculadora2
 
         private void AgregarOperador(char operador)
         {
-            // Evita que se añadan dos operadores seguidos (como "5++" o "6**")
-            if (operacionTxT.TextLength == 0) return; // No puede empezar con operador (excepto '-')
+            // Evita operadores duplicados, pero permite '-' o '√' al inicio
+            if (operacionTxT.TextLength == 0 && operador != '-' && operador != '√')
+                return;
+
+            if (operacionTxT.TextLength > 0)
+            {
+                char ultimo = operacionTxT.Text[operacionTxT.TextLength - 1];
+                if ("+-*/^√.".Contains(ultimo))
+                {
+                    // Evita secuencias inválidas (excepto casos como √9 o -5)
+                    if (!(operador == '-' && ultimo != '-') && operador != '√')
+                        return;
+                }
+            }
 
             operacionTxT.AppendText(operador.ToString());
         }
 
-        //BOTONES DE NÚMEROS
+        // BOTONES DE NÚMEROS
         private void bt0_Click(object sender, EventArgs e) => AgregarTexto("0");
         private void bt1_Click(object sender, EventArgs e) => AgregarTexto("1");
         private void bt2_Click(object sender, EventArgs e) => AgregarTexto("2");
@@ -214,7 +230,7 @@ namespace Calculadora2
         private void bt8_Click(object sender, EventArgs e) => AgregarTexto("8");
         private void bt9_Click(object sender, EventArgs e) => AgregarTexto("9");
 
-        //BOTONES DE OPERADORES
+        // BOTONES DE OPERADORES
         private void btSuma_Click(object sender, EventArgs e) => AgregarOperador('+');
         private void btResta_Click(object sender, EventArgs e) => AgregarOperador('-');
         private void btMultiplicacion_Click(object sender, EventArgs e) => AgregarOperador('*');
@@ -223,11 +239,10 @@ namespace Calculadora2
         private void btExponente_Click(object sender, EventArgs e) => AgregarOperador('^');
         private void btComa_Click(object sender, EventArgs e) => AgregarOperador('.');
 
-        //BOTÓN BORRAR
+        // BOTÓN BORRAR
         private void btBorrar_Click(object sender, EventArgs e)
         {
             operacionTxT.Text = "";
         }
-
     }
 }
