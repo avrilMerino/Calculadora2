@@ -81,7 +81,13 @@ namespace Calculadora2
 
         private void btSuma_Click(object sender, EventArgs e)
         {
-            operacionTxT.Text += "+";
+            int aux = this.operacionTxT.TextLength;
+            char signo = this.operacionTxT.Text[aux - 1];
+
+            if (signo != '+')
+            {
+                operacionTxT.Text += "+";
+            }
         }
         
         private void bt0_Click(object sender, EventArgs e)
@@ -91,7 +97,13 @@ namespace Calculadora2
 
         private void btRaiz_Click(object sender, EventArgs e)
         {
-            operacionTxT.Text += "√";
+            int aux = this.operacionTxT.TextLength;
+            char signo = this.operacionTxT.Text[aux - 1];
+
+            if (signo != '√')
+            {
+                operacionTxT.Text += "√";
+            }
         }
 
         private void bt6_Click(object sender, EventArgs e)
@@ -101,22 +113,46 @@ namespace Calculadora2
 
         private void btComa_Click(object sender, EventArgs e)
         {
-            operacionTxT.Text += ".";
+            int aux = this.operacionTxT.TextLength;
+            char signo = this.operacionTxT.Text[aux - 1];
+
+            if (signo != '.')
+            {
+                operacionTxT.Text += ".";
+            }
         }
 
         private void btResta_Click(object sender, EventArgs e)
         {
-            operacionTxT.Text += "-";
+            int aux = this.operacionTxT.TextLength;
+            char signo = this.operacionTxT.Text[aux - 1];
+
+            if (signo != '-')
+            {
+                operacionTxT.Text += "-";
+            }
         }
 
         private void btMultiplicacion_Click(object sender, EventArgs e)
         {
-            operacionTxT.Text += "*";
+            int aux = this.operacionTxT.TextLength;
+            char signo = this.operacionTxT.Text[aux - 1];
+
+            if (signo != '*')
+            {
+                operacionTxT.Text += "*";
+            }
         }
 
         private void btDivision_Click(object sender, EventArgs e)
         {
-            operacionTxT.Text += "/";
+            int aux = this.operacionTxT.TextLength;
+            char signo = this.operacionTxT.Text[aux - 1];
+
+            if (signo != '/')
+            {
+                operacionTxT.Text += "/";
+            }
         }
 
         private void bt7_Click(object sender, EventArgs e)
@@ -136,7 +172,13 @@ namespace Calculadora2
 
         private void btExponente_Click(object sender, EventArgs e)
         {
-            operacionTxT.Text += "^";
+            int aux = this.operacionTxT.TextLength;
+            char signo = this.operacionTxT.Text[aux - 1];
+
+            if (signo != '^')
+            {
+                operacionTxT.Text += "^";
+            }
         }
 
         private void bt4_Click(object sender, EventArgs e)
@@ -159,9 +201,9 @@ namespace Calculadora2
             operacionTxT.Text += "2";
         }
 
-        private void bt3_Click(object sender, EventArgs e)
-        {
-            operacionTxT.Text += "3";
+        private void bt3_Click(object sender, EventArgs e)   
+        {   
+            
         }
     }
 }
