@@ -217,7 +217,7 @@ namespace Calculadora2
         }
 
 
-        //BOTONES DE NÚMEROS
+        // BOTONES DE NÚMEROSd 
         private void bt0_Click(object sender, EventArgs e) => AgregarTexto("0");
         private void bt1_Click(object sender, EventArgs e) => AgregarTexto("1");
         private void bt2_Click(object sender, EventArgs e) => AgregarTexto("2");
