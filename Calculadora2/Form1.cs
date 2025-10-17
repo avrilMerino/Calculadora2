@@ -177,7 +177,6 @@ namespace Calculadora2
             }
 
 //FASE 7: Manejo de errores
-            // Mostramos mensajes claros si ocurre algo.
             catch (DivideByZeroException)
             {
                 MessageBox.Show("Vuelve a primaria");
@@ -192,20 +191,14 @@ namespace Calculadora2
         private void AgregarTexto(string texto)
         {
             // Añade un número u operador al final del texto actual
-            operacionTxT.Text.Append(texto).toS;
+            operacionTxT.AppendText(texto);
         }
 
         private void AgregarOperador(char operador)
         {
             // Evita que se añadan dos operadores seguidos (como "5++" o "6**")
             if (operacionTxT.TextLength == 0) return; // No puede empezar con operador (excepto '-')
-            char ultimo = operacionTxT.Text.Last();
-
-            string operadores = "+-*/√^.";
-            if (!operadores.Contains(ultimo))
-            {
-                operacionTxT.Text += operador;
-            }
+            operacionTxT.AppendText(operador.ToString());
         }
 
         //BOTONES DE NÚMEROS
