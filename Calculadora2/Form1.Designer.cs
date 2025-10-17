@@ -62,7 +62,6 @@
             this.operacionTxT.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.operacionTxT.Size = new System.Drawing.Size(295, 75);
             this.operacionTxT.TabIndex = 1;
-            this.operacionTxT.TextChanged += new System.EventHandler(this.operacionTxt_TextChanged);
             // 
             // btIgual
             // 
